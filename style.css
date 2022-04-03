@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+:root{
+    --background:#202124;
+    --cell-size:100px;
+    --mark-size: calc(var(--cell-size)*0.9);
+}
+body{
+    background:var(--background);
+
+}
+main.end{
+    filter:blur(8px);
+
+    --webkit-filter:blur(8px);
+}
+header{
+    text-align:center;
+    color:white;
+    font: 400 12pt "Roboto", sans-serif;
+    margin:64px 0 64px 0;
+}
+.board{
+    display:grid;
+    align-items:center;
+    justify-content: center;
+    grid-template-columns: repeat(3,auto);
+}
+.cell{
+   
+    width: var(--cell-size);
+    height: var(--cell-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    border: 1px white solid;
+    border-top:none;
+    border-right: none;
+
+    position:relative;
+}
+.cell:nth-child(3n+1){
+    border-left:none;
+}
+.cell:nth-child(n+7){
+    border-bottom:none;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.o::before{
+    background-color:white;
+}
+
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after{
+    background-color: #3d3d3d;
+}
+/*==== JOGADOR X ====*/
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after,
+.cell.x::before,
+.cell.x::after{
+    content:"";
+    width:calc(var(--mark-size)*0.15);
+    height:var(--mark-size);
+   
+    position:absolute;
+}
+.board.x .cell:hover::before,
+.cell.x::before{
+    transform:rotate(45deg);
+}
+
+.board.x .cell:hover::after,
+.cell.x::after{
+    transform:rotate(-45deg);
+}
+
+/*==== JOGADOR O ====*/
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after,
+.cell.o::before,
+.cell.o::after{
+    content:"";
+    border-radius:50%;
+    position:absolute;
+}
+.board.o .cell:not(.x):not(.o):hover::before,
+.cell.o::before{
+    width:calc(var(--mark-size)*0.9);
+    height:calc(var(--mark-size)*0.9);
+ 
+}
+.board.o .cell:not(.x):not(.o):hover::after,
+.cell.o::after{
+    width:calc(var(--mark-size)*0.6);
+    height:calc(var(--mark-size)*0.6);
+    background-color:var(--background);
+ 
+}
+
+.cell.x,
+.cell.o{
+
+    cursor:not-allowed;
+}
+.game-end{
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    display:none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font:400 24pt "Roboto", sans-serif;
+}
+
+.game-end button{
+    font-size:14pt;
+    background-color: var(--background);
+    border: 1px solid white;
+    color: white;
+    border-radius:15px;
+    padding:8px;
+    margin:8px;
+    cursor: pointer;
+}
+.game-end button:hover{
+    filter: brightness(160%);
+}
+.game-end.show{
+    display: flex;
+}
